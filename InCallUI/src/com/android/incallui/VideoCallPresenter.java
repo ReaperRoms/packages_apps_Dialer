@@ -293,8 +293,6 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         final InCallPresenter.InCallState inCallState =
              InCallPresenter.getInstance().getInCallState();
         onStateChange(inCallState, inCallState, CallList.getInstance());
-        InCallVideoCallCallbackNotifier.getInstance().addVideoEventListener(this,
-                VideoUtils.isVideoCall(mCurrentVideoState));
     }
 
     /**
@@ -757,9 +755,9 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         }
     }
 
-    private boolean isCameraRequired(int videoState) {
-        return ((VideoProfile.isBidirectional(videoState) ||
-                VideoProfile.isTransmissionEnabled(videoState)) && !mIsInBackground);
+    private static boolean isCameraRequired(int videoState) {
+        return VideoProfile.isBidirectional(videoState)
+                || VideoProfile.isTransmissionEnabled(videoState);
     }
 
     private boolean isCameraRequired() {
@@ -1305,11 +1303,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         mAutoFullScreenPending = false;
     }
 
-    private static boolean isAudioRouteEnabled(int audioRoute, int audioRouteMask) {
-        return ((audioRoute & audioRouteMask) != 0);
-    }
-
-    private void updateCameraSelection(Call call) {
+    private static void updateCameraSelection(Call call) {
         Log.d(TAG, "updateCameraSelection: call=" + call);
         Log.d(TAG, "updateCameraSelection: call=" + toSimpleString(call));
 

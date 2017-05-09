@@ -1085,8 +1085,8 @@ public class Call {
             return String.valueOf(mId);
         }
 
-        return String.format(Locale.US, "[%s, %s, %s, %s, children:%s, parent:%s, conferenceable:%s, " +
-                "videoState:%s, mSessionModificationState:%d, VideoSettings:%s, mIsActivSub:%b]",
+        return String.format(Locale.US, "[%s, %s, %s, %s, children:%s, parent:%s, " +
+                "conferenceable:%s, videoState:%s, mSessionModificationState:%d, VideoSettings:%s]",
                 mId,
                 State.toString(getState()),
                 Details.capabilitiesToString(mTelecomCall.getDetails().getCallCapabilities()),

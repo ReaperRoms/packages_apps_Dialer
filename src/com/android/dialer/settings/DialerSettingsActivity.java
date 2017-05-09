@@ -172,6 +172,18 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
                 && getResources().getBoolean(R.bool.config_sort_order_user_changeable);
     }
 
+    /**
+    * Returns {@code true} or {@code false} based on whether the display options setting should be
+    * shown. For languages such as Chinese, Japanese, or Korean, display options aren't useful
+    * since contacts are sorted and displayed family name first by default.
+    *
+    * @return {@code true} if the display options should be shown, {@code false} otherwise.
+    */
+    private boolean showDisplayOptions() {
+        return getResources().getBoolean(R.bool.config_display_order_user_changeable)
+                && getResources().getBoolean(R.bool.config_sort_order_user_changeable);
+    }
+
     @Override
     public void onHeaderClick(Header header, int position) {
         if (header.id == R.id.settings_header_sounds_and_vibration) {
